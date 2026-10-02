@@ -4,10 +4,10 @@ export class Team {
     this.members = Array.isArray(members) ? [...members] : [];
   }
 
-  addMember(member) {
-    if (member && typeof member === 'object') {
-      this.members.push(member);
-    }
+  addMember(member, role = '') {
+    this.members.push(
+      typeof member === 'object' ? member : {name: member, role},
+    );
   }
 
   removeMember(name) {
@@ -66,7 +66,7 @@ export function getUniqueRoles(teams) {
 }
 
 export function groupTeamsByMemberCount(teams) {
-  const result = {};
+  const result = new Map();
   if (!Array.isArray(teams)) {
     return result;
   }
@@ -75,17 +75,12 @@ export function groupTeamsByMemberCount(teams) {
     if (!team) {
       continue;
     }
-    const count =
-      typeof team.memberCount === 'number'
-        ? team.memberCount
-        : Array.isArray(team.members)
-          ? team.members.length
-          : 0;
+    const count = team.memberCount ?? team.members?.length ?? 0;
+    const list = result.get(count) || [];
+    list.push(team);
 
-    if (!result[count]) {
-      result[count] = [];
-    }
-    result[count].push(team);
+    result.set(count, list);
+    result[count] = list;
   }
 
   return result;
