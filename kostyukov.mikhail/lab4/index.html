@@ -7,13 +7,29 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <main>
-      <h1>Лабораторная работа 4</h1>
-      <form data-testid="entity-form">
-        <!-- Добавьте поля name, которые требует ваш вариант. -->
-        <button type="submit">Добавить</button>
-      </form>
+    <main class="container">
+      <h1 class="page-title">Управление командами</h1>
+
+      <section class="section-card" aria-labelledby="form-heading">
+        <h2 id="form-heading" class="section-title">Создать новую команду</h2>
+        <form class="team-form" data-testid="entity-form">
+          <div class="form-group">
+            <label for="team-name" class="form-label">Название команды</label>
+            <input
+              id="team-name"
+              class="form-input"
+              name="name"
+              type="text"
+              placeholder="Например, Dream Team"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Добавить команду</button>
+        </form>
+      </section>
+
       <section
+        class="team-list"
         data-testid="entity-list"
         aria-label="Список элементов"
       ></section>
