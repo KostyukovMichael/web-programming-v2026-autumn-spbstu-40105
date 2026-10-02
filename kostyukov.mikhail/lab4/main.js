@@ -1,4 +1,4 @@
-import { Team } from './model.js';
+import {Team} from './model.js';
 
 const STORAGE_KEY = 'lab4_teams';
 
@@ -14,17 +14,25 @@ function loadTeams() {
 }
 
 const teams = loadTeams();
-const saveTeams = () => localStorage.setItem(STORAGE_KEY, JSON.stringify(teams));
+const saveTeams = () =>
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(teams));
 
 const escape = (str) =>
-  String(str).replace(/[&<>"']/g, (s) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[s]);
+  String(str).replace(
+    /[&<>"']/g,
+    (s) =>
+      ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'})[
+        s
+      ],
+  );
 
 const entityForm = document.querySelector('[data-testid="entity-form"]');
 const entityList = document.querySelector('[data-testid="entity-list"]');
 
 function render() {
   if (teams.length === 0) {
-    entityList.innerHTML = '<p class="empty-notice">Команд пока нет. Создайте первую!</p>';
+    entityList.innerHTML =
+      '<p class="empty-notice">Команд пока нет. Создайте первую!</p>';
     return;
   }
 
@@ -55,7 +63,7 @@ function render() {
                   <button type="button" class="btn-small-danger" data-action="delete-member" data-team-index="${index}" data-name="${escape(m.name)}">
                     Удалить
                   </button>
-                </li>`
+                </li>`,
                   )
                   .join('')
           }
@@ -68,7 +76,7 @@ function render() {
         <button type="submit" class="btn btn-secondary">Добавить участника</button>
       </form>
     </article>
-  `
+  `,
     )
     .join('');
 }
@@ -77,7 +85,9 @@ entityForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   const input = entityForm.elements.name;
   const name = input.value.trim();
-  if (!name) return;
+  if (!name) {
+    return;
+  }
 
   await wait();
   teams.push(new Team(name));
@@ -88,7 +98,9 @@ entityForm.addEventListener('submit', async (e) => {
 
 entityList.addEventListener('click', async (e) => {
   const btn = e.target.closest('button');
-  if (!btn) return;
+  if (!btn) {
+    return;
+  }
 
   const teamIndex = Number(btn.dataset.teamIndex);
 
@@ -116,13 +128,17 @@ entityList.addEventListener('submit', async (e) => {
   const memberName = form.elements.name.value.trim();
   const memberRole = form.elements.role.value.trim();
 
-  if (!memberName || !memberRole) return;
+  if (!memberName || !memberRole) {
+    return;
+  }
 
   const submitBtn = form.querySelector('button[type="submit"]');
-  if (submitBtn) submitBtn.disabled = true;
+  if (submitBtn) {
+    submitBtn.disabled = true;
+  }
 
   await wait();
-  teams[teamIndex].addMember({ name: memberName, role: memberRole });
+  teams[teamIndex].addMember({name: memberName, role: memberRole});
   saveTeams();
   render();
 });

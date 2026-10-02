@@ -23,12 +23,18 @@ export class Team {
 
 export function groupMembersByRole(teams) {
   const result = {};
-  if (!Array.isArray(teams)) return result;
+  if (!Array.isArray(teams)) {
+    return result;
+  }
 
   for (const team of teams) {
-    if (!team || !Array.isArray(team.members)) continue;
+    if (!team || !Array.isArray(team.members)) {
+      continue;
+    }
     for (const member of team.members) {
-      if (!member || typeof member.role !== 'string') continue;
+      if (!member || typeof member.role !== 'string') {
+        continue;
+      }
       if (!result[member.role]) {
         result[member.role] = [];
       }
@@ -41,10 +47,14 @@ export function groupMembersByRole(teams) {
 
 export function getUniqueRoles(teams) {
   const roles = new Set();
-  if (!Array.isArray(teams)) return [];
+  if (!Array.isArray(teams)) {
+    return [];
+  }
 
   for (const team of teams) {
-    if (!team || !Array.isArray(team.members)) continue;
+    if (!team || !Array.isArray(team.members)) {
+      continue;
+    }
     for (const member of team.members) {
       if (member && typeof member.role === 'string') {
         roles.add(member.role);
@@ -57,10 +67,14 @@ export function getUniqueRoles(teams) {
 
 export function groupTeamsByMemberCount(teams) {
   const result = {};
-  if (!Array.isArray(teams)) return result;
+  if (!Array.isArray(teams)) {
+    return result;
+  }
 
   for (const team of teams) {
-    if (!team) continue;
+    if (!team) {
+      continue;
+    }
     const count =
       typeof team.memberCount === 'number'
         ? team.memberCount
@@ -78,26 +92,34 @@ export function groupTeamsByMemberCount(teams) {
 }
 
 export function findTeamsByMember(teams, name) {
-  if (!Array.isArray(teams)) return [];
+  if (!Array.isArray(teams)) {
+    return [];
+  }
 
   return teams.filter(
     (team) =>
       team &&
       Array.isArray(team.members) &&
-      team.members.some((member) => member && member.name === name)
+      team.members.some((member) => member && member.name === name),
   );
 }
 
 export function getUniqueMembers(teams) {
-  if (!Array.isArray(teams)) return [];
+  if (!Array.isArray(teams)) {
+    return [];
+  }
 
   const seen = new Set();
   const result = [];
 
   for (const team of teams) {
-    if (!team || !Array.isArray(team.members)) continue;
+    if (!team || !Array.isArray(team.members)) {
+      continue;
+    }
     for (const member of team.members) {
-      if (!member || typeof member.name !== 'string') continue;
+      if (!member || typeof member.name !== 'string') {
+        continue;
+      }
       if (!seen.has(member.name)) {
         seen.add(member.name);
         result.push(member);
