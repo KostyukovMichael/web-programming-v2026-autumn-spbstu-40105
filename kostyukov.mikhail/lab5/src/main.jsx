@@ -122,7 +122,7 @@ function TreeNode({item}) {
       className="tree-item"
       role="treeitem"
       aria-expanded={hasChildren ? isOpen : undefined}
-      data-testid={hasChildren ? 'tree-node' : 'tree-leaf'}
+      data-testid={hasChildren ? 'tree-branch' : 'tree-leaf'}
     >
       {hasChildren ? (
         <button
