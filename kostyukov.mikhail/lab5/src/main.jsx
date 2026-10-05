@@ -1,5 +1,5 @@
-import React, { StrictMode, useState } from 'react';
-import { createRoot } from 'react-dom/client';
+import React, {StrictMode, useState} from 'react';
+import {createRoot} from 'react-dom/client';
 import './styles.css';
 
 const booksData = [
@@ -21,11 +21,16 @@ const booksData = [
             type: 'genre',
             typeLabel: 'Жанр',
             children: [
-              { id: 'book-1-1-1-1', name: 'Цветы для Элджернона', type: 'book', typeLabel: 'Книга' }
+              {
+                id: 'book-1-1-1-1',
+                name: 'Цветы для Элджернона',
+                type: 'book',
+                typeLabel: 'Книга',
+              },
             ],
           },
         ],
-      }
+      },
     ],
   },
   {
@@ -46,8 +51,18 @@ const booksData = [
             type: 'genre',
             typeLabel: 'Жанр',
             children: [
-              { id: 'book-2-1-1-1', name: 'Человек, который смеется', type: 'book', typeLabel: 'Книга' },
-              { id: 'book-2-1-1-2', name: 'Собор Парижской Богоматери', type: 'book', typeLabel: 'Книга' },
+              {
+                id: 'book-2-1-1-1',
+                name: 'Человек, который смеется',
+                type: 'book',
+                typeLabel: 'Книга',
+              },
+              {
+                id: 'book-2-1-1-2',
+                name: 'Собор Парижской Богоматери',
+                type: 'book',
+                typeLabel: 'Книга',
+              },
             ],
           },
         ],
@@ -72,9 +87,24 @@ const booksData = [
             type: 'genre',
             typeLabel: 'Жанр',
             children: [
-              { id: 'book-3-1-1-1', name: 'Серебряный ключ', type: 'book', typeLabel: 'Книга' },
-              { id: 'book-3-1-1-2', name: 'Хребты безумия', type: 'book', typeLabel: 'Книга' },
-              { id: 'book-3-1-1-3', name: 'Зов Ктулху', type: 'book', typeLabel: 'Книга' },
+              {
+                id: 'book-3-1-1-1',
+                name: 'Серебряный ключ',
+                type: 'book',
+                typeLabel: 'Книга',
+              },
+              {
+                id: 'book-3-1-1-2',
+                name: 'Хребты безумия',
+                type: 'book',
+                typeLabel: 'Книга',
+              },
+              {
+                id: 'book-3-1-1-3',
+                name: 'Зов Ктулху',
+                type: 'book',
+                typeLabel: 'Книга',
+              },
             ],
           },
         ],
@@ -83,7 +113,7 @@ const booksData = [
   },
 ];
 
-function TreeNode({ item }) {
+function TreeNode({item}) {
   const [isOpen, setIsOpen] = useState(true);
   const hasChildren = Boolean(item.children && item.children.length > 0);
 
@@ -102,13 +132,17 @@ function TreeNode({ item }) {
           onClick={() => setIsOpen((prev) => !prev)}
         >
           <span className="tree-arrow">{isOpen ? '|' : '>'}</span>
-          <span className={`tree-badge tree-badge-${item.type}`}>{item.typeLabel}</span>
+          <span className={`tree-badge tree-badge-${item.type}`}>
+            {item.typeLabel}
+          </span>
           <span className="tree-label">{item.name}</span>
         </button>
       ) : (
         <div className="tree-leaf-content">
           <span className="tree-bullet">•</span>
-          <span className={`tree-badge tree-badge-${item.type}`}>{item.typeLabel}</span>
+          <span className={`tree-badge tree-badge-${item.type}`}>
+            {item.typeLabel}
+          </span>
           <span className="tree-label">{item.name}</span>
         </div>
       )}
