@@ -1,11 +1,11 @@
-import { StrictMode, useState } from 'react';
+import React, { StrictMode, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 
 const booksData = [
   {
     id: 'author-1',
-    name: 'Лев Толстой',
+    name: 'Дэниел Киз',
     type: 'author',
     typeLabel: 'Автор',
     children: [
@@ -17,72 +17,37 @@ const booksData = [
         children: [
           {
             id: 'genre-1-1-1',
-            name: 'Роман',
+            name: 'Научная фантастика',
             type: 'genre',
             typeLabel: 'Жанр',
             children: [
-              { id: 'book-1-1-1-1', name: 'Война и мир', type: 'book', typeLabel: 'Книга' },
-              { id: 'book-1-1-1-2', name: 'Анна Каренина', type: 'book', typeLabel: 'Книга' },
+              { id: 'book-1-1-1-1', name: 'Цветы для Элджернона', type: 'book', typeLabel: 'Книга' }
             ],
           },
         ],
-      },
-      {
-        id: 'pub-1-2',
-        name: 'АСТ',
-        type: 'publisher',
-        typeLabel: 'Издательство',
-        children: [
-          {
-            id: 'genre-1-2-1',
-            name: 'Повесть',
-            type: 'genre',
-            typeLabel: 'Жанр',
-            children: [
-              { id: 'book-1-2-1-1', name: 'Смерть Ивана Ильича', type: 'book', typeLabel: 'Книга' },
-            ],
-          },
-        ],
-      },
+      }
     ],
   },
   {
     id: 'author-2',
-    name: 'Фёдор Достоевский',
+    name: 'Виктор Гюго',
     type: 'author',
     typeLabel: 'Автор',
     children: [
       {
         id: 'pub-2-1',
-        name: 'Азбука',
-        type: 'publisher',
-        typeLabel: 'Издательство',
-        children: [
-          {
-            id: 'genre-2-1-1',
-            name: 'Классическая проза',
-            type: 'genre',
-            typeLabel: 'Жанр',
-            children: [
-              { id: 'book-2-1-1-1', name: 'Преступление и наказание', type: 'book', typeLabel: 'Книга' },
-              { id: 'book-2-1-1-2', name: 'Идиот', type: 'book', typeLabel: 'Книга' },
-            ],
-          },
-        ],
-      },
-      {
-        id: 'pub-2-2',
         name: 'Эксмо',
         type: 'publisher',
         typeLabel: 'Издательство',
         children: [
           {
-            id: 'genre-2-2-1',
-            name: 'Роман',
+            id: 'genre-2-1-1',
+            name: 'Исторический роман',
             type: 'genre',
             typeLabel: 'Жанр',
             children: [
-              { id: 'book-2-2-1-1', name: 'Братья Карамазовы', type: 'book', typeLabel: 'Книга' },
+              { id: 'book-2-1-1-1', name: 'Человек, который смеется', type: 'book', typeLabel: 'Книга' },
+              { id: 'book-2-1-1-2', name: 'Собор Парижской Богоматери', type: 'book', typeLabel: 'Книга' },
             ],
           },
         ],
@@ -91,7 +56,7 @@ const booksData = [
   },
   {
     id: 'author-3',
-    name: 'Джордж Оруэлл',
+    name: 'Говард Филлипс Лавкрафт',
     type: 'author',
     typeLabel: 'Автор',
     children: [
@@ -103,12 +68,13 @@ const booksData = [
         children: [
           {
             id: 'genre-3-1-1',
-            name: 'Антиутопия',
+            name: 'Ужасы',
             type: 'genre',
             typeLabel: 'Жанр',
             children: [
-              { id: 'book-3-1-1-1', name: '1984', type: 'book', typeLabel: 'Книга' },
-              { id: 'book-3-1-1-2', name: 'Скотный двор', type: 'book', typeLabel: 'Книга' },
+              { id: 'book-3-1-1-1', name: 'Серебряный ключ', type: 'book', typeLabel: 'Книга' },
+              { id: 'book-3-1-1-2', name: 'Хребты безумия', type: 'book', typeLabel: 'Книга' },
+              { id: 'book-3-1-1-3', name: 'Зов Ктулху', type: 'book', typeLabel: 'Книга' },
             ],
           },
         ],
@@ -135,7 +101,7 @@ function TreeNode({ item }) {
           data-testid="toggle-button"
           onClick={() => setIsOpen((prev) => !prev)}
         >
-          <span className="tree-arrow">{isOpen ? '▼' : '►'}</span>
+          <span className="tree-arrow">{isOpen ? '|' : '>'}</span>
           <span className={`tree-badge tree-badge-${item.type}`}>{item.typeLabel}</span>
           <span className="tree-label">{item.name}</span>
         </button>
