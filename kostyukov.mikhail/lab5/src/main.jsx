@@ -128,7 +128,7 @@ function TreeNode({item}) {
         <button
           type="button"
           className="tree-node-button"
-          data-testid="toggle-button"
+          data-testid="tree-toggle"
           onClick={() => setIsOpen((prev) => !prev)}
         >
           <span className="tree-arrow">{isOpen ? '|' : '>'}</span>
