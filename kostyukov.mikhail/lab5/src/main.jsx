@@ -132,7 +132,10 @@ function TreeNode({item}) {
           onClick={() => setIsOpen((prev) => !prev)}
         >
           <span className="tree-arrow">{isOpen ? '|' : '>'}</span>
-          <span className={`tree-badge tree-badge-${item.type}`}>
+          <span
+            data-testid="tree-level"
+            className={`tree-badge tree-badge-${item.type}`}
+          >
             {item.typeLabel}
           </span>
           <span className="tree-label">{item.name}</span>
@@ -140,7 +143,10 @@ function TreeNode({item}) {
       ) : (
         <div className="tree-leaf-content">
           <span className="tree-bullet">•</span>
-          <span className={`tree-badge tree-badge-${item.type}`}>
+          <span
+            data-testid="tree-level"
+            className={`tree-badge tree-badge-${item.type}`}
+          >
             {item.typeLabel}
           </span>
           <span className="tree-label">{item.name}</span>
